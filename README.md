@@ -1,6 +1,6 @@
 # bwscan
 
-Terminal-based optimizer for B&W negative scans, tuned for one fixed
+Terminal-based optimizer for B&W negative scans, tuned for my fixed
 pipeline: **Kentmere 400** in a **Pentax Spotmatic ES2**, scanned on a
 **Plustek 7200** via **VueScan** (16-bit RGB TIFF, whole roll batches).
 
@@ -10,8 +10,6 @@ remaps per photo (black/white percentile clips, plus one mild S-curve), you
 pick the best one in the terminal while it opens a contact-sheet grid in
 Preview, and it learns which clip values suit the setup so future rolls can
 be handled with a single command and a quick outlier check.
-
-Dust/scratch cleanup is deliberately out of scope.
 
 ## Install
 
@@ -124,9 +122,3 @@ bwscan/profile_store.py  pick history + learned default (JSON)
 bwscan/apply.py    full-resolution output
 tests/             pytest suite (synthetic scans)
 ```
-
-## Open questions to resolve with real rolls
-
-- Symmetric vs independent black/white clip search ranges — the grid is
-  currently a fixed 5+1 diagonal; once real histograms are in, the grid can
-  be narrowed or widened per your Kentmere/Spotmatic/Plustek behavior.
