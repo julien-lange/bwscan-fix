@@ -1,0 +1,3 @@
+numpy>=1.22
+tifffile>=2023
+Pillow>=9

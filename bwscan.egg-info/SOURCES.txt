@@ -1,0 +1,16 @@
+pyproject.toml
+bwscan/__init__.py
+bwscan/apply.py
+bwscan/cli.py
+bwscan/grid.py
+bwscan/io_tiff.py
+bwscan/profile_store.py
+bwscan/review.py
+bwscan/stats.py
+bwscan/variants.py
+bwscan.egg-info/PKG-INFO
+bwscan.egg-info/SOURCES.txt
+bwscan.egg-info/dependency_links.txt
+bwscan.egg-info/entry_points.txt
+bwscan.egg-info/requires.txt
+bwscan.egg-info/top_level.txt

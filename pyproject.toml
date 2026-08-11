@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "bwscan"
+version = "0.1.0"
+description = "B&W negative scan optimizer tuned for Kentmere 400 / Pentax Spotmatic / Plustek 7200"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy>=1.22",
+    "tifffile>=2023",
+    "Pillow>=9",
+]
+
+[project.scripts]
+bwscan = "bwscan.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["bwscan*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
