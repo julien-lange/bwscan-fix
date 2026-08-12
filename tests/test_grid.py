@@ -23,6 +23,34 @@ def test_grid_roundtrip(tmp_path):
     assert loaded.size == img.size
 
 
+def test_open_image_uses_background_flag(monkeypatch, tmp_path):
+    calls = []
+
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd)
+        raise OSError  # simulate 'open' missing so fallback path is exercised
+
+    monkeypatch.setattr("subprocess.run", fake_run)
+    grid.open_image(tmp_path / "x.png")
+    assert calls, "expected at least one open attempt"
+    assert calls[0][0] == "open" and "-g" in calls[0]
+
+
+def test_close_image_targets_filename(monkeypatch, tmp_path):
+    calls = []
+
+    def fake_run(cmd, **kwargs):
+        calls.append(cmd)
+        class R:
+            returncode = 0
+        return R()
+
+    monkeypatch.setattr("subprocess.run", fake_run)
+    grid.close_image(tmp_path / "neg00_grid.png")
+    joined = " ".join(calls[0])
+    assert "Preview" in joined and "neg00_grid.png" in joined
+
+
 def test_to_pil_aspect(tmp_path):
     tiff = make_tiff(tmp_path / "x.tif", size=(50, 100))
     from bwscan import io_tiff

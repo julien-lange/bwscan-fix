@@ -95,8 +95,12 @@ def write_grid(
 
 
 def open_image(path: str | Path) -> None:
-    """Open a file in the default macOS viewer (Preview)."""
-    for opener in (["open", str(path)],):
+    """Open a file in Preview without taking focus from the terminal.
+
+    ``open -g`` launches/refreshes the app in the background: the grid window
+    appears, but the terminal keeps keyboard focus so you can keep picking.
+    """
+    for opener in (["open", "-g", str(path)],):
         try:
             subprocess.run(opener, check=True, capture_output=True)
         except (OSError, subprocess.CalledProcessError):
@@ -109,7 +113,8 @@ def close_image(path: str | Path) -> None:
 
     Opens just the grid PNG named after the photo, so we can target that one
     window (by its document name) and close it once a pick has been made —
-    otherwise Preview piles up one window per photo across the roll.
+    otherwise Preview piles up one window per photo across the roll. Closing
+    via AppleScript does not bring Preview to the foreground.
     """
     name = Path(path).name
     script = (
